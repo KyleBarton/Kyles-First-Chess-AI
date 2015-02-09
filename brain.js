@@ -11,7 +11,7 @@ function simRandomGame(){
 		var move = moves[Math.floor(Math.random() * moves.length)]
 		game.move(move);
 		console.log("move: " + move + '\n');
-		console.readLine();
+		//console.readLine();
 	}
 }
 
