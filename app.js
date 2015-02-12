@@ -5,7 +5,7 @@ var brainApp = angular.module("brainApp", []);
 
 
 brainApp.controller('chessController', function($scope){
-	$scope.currentBoard = 'Hi there!';
+	$scope.currentBoard = 12;
 });
 	// .controller("chessController", function($scope, $http){
 	// 	$scope.currentBoard = 6;

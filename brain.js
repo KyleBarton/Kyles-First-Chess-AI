@@ -10,7 +10,7 @@ var app = express();
 app.use(express.static(__dirname));
 
 app.get('/', function(req, res){
-	res.send(__dirname); //+ '/index.html');
+	res.send(__dirname);
 })
 
 
@@ -22,11 +22,6 @@ app.get('/game', function(req, res){
 app.listen(3000);
 
 console.log('Listening on port 3000');
-//console.log(__dirname + '/index.html');
-
-
-
-
 
 
 
