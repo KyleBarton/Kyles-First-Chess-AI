@@ -16,8 +16,9 @@ app.get('/', function(req, res){
 
 app.get('/game', function(req, res){
 	var game = chess.Chess();
-	res.send(game.asii());
-})
+	var file = game.ascii();
+	res.send(file);
+});
 
 app.listen(3000);
 
