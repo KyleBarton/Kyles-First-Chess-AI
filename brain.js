@@ -29,6 +29,12 @@ app.get('/nextMove', function(req, res){
 	var game = chess.Chess();
 	game.load(req.query.game);
 	game.move(nextMove(game));
+	res.send(game.fen());
+})
+
+app.get('/ascii', function(req, res){
+	var game = chess.Chess();
+	game.load(req.query.game);
 	res.send(game.ascii());
 })
 

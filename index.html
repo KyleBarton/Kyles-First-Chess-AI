@@ -8,9 +8,10 @@
 	<body>
 	HI THERE
 	<div ng-app="brainApp" ng-controller="chessController">
-		<br>{{newGame}}</br>
-		<br>{{squareA2}}</br>
+		<br>{{gameFen}}</br>
+		<br>{{gameAscii}}</br>
+		<!-- <br>{{squareA2}}</br> -->
 		<!-- <br>{{nextGame}}</br> -->
-		<button ng-click="">Next Move!</button>
+		<button ng-click="nextMove()">Next Move!</button>
 	</div>
 </html>
