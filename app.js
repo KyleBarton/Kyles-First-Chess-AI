@@ -1,21 +1,26 @@
-//This is the controller I guess?
-
 var brainApp = angular.module("brainApp", []);
 
 
 
 brainApp.controller('chessController', function($scope, $http){
-	$http.get('/game').success(function(data){
-		$scope.currentBoard = data;
+	$http.get('/newGame').success(function(data){
+		$scope.newGame = data;
 	}).error(function(err){
-		$scope.currentBoard = 12;
-	})
+		$scope.newGame = 'could not find endpoint';
+	});
+	$http.get('/a2').success(function(data){
+		if (data.color === "b"){
+			$scope.squareA2 = data.type;
+		}
+		else $scope.squareA2 = data.type.toUpperCase();
+	}).error(function(err){
+		$scope.squareA2 = "nope";
+	});
 });
-	// .controller("chessController", function($scope, $http){
-	// 	$scope.currentBoard = 6;
-	// 	// $http.get('/game').success(function(data){
-	// 	// 	$scope.currentBoard = data;
-	// 	// }).fail(function(data){
-	// 	// 	$scope.currentBoard = 'Nope!';
-	// 	// })
-	// })
+
+// function nextMove(game){
+// 	function($scope, $http){
+// 		$http.get('/nextMove?game=' + $scope.newGame).success(function(data){
+// 		$scope.nextGame = data;
+// 	});
+// };};

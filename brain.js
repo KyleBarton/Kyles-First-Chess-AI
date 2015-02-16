@@ -14,11 +14,23 @@ app.get('/', function(req, res){
 })
 
 
-app.get('/game', function(req, res){
+app.get('/newGame', function(req, res){
 	var game = chess.Chess();
-	var file = game.ascii();
+	var file = game.fen();
 	res.send(file);
 });
+
+app.get('/a2', function(req, res){
+	var game = chess.Chess();
+	res.send(game.get('a2'));
+})
+
+app.get('/nextMove', function(req, res){
+	var game = chess.Chess();
+	game.load(req.query.game);
+	game.move(nextMove(game));
+	res.send(game.ascii());
+})
 
 app.listen(3000);
 
@@ -41,13 +53,13 @@ console.log('Listening on port 3000');
 // 	}
 // }
 
-// function nextMove(game){
-// 	var moves = game.moves();
+function nextMove(game){
+	var moves = game.moves();
 
-// 	var move = moves[Math.floor(Math.random() * moves.length)];
+	var move = moves[Math.floor(Math.random() * moves.length)];
 
-// 	return move;
-// }
+	return move;
+}
 
 // var bigGame = new chess.Chess();
 
