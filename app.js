@@ -36,6 +36,17 @@ brainApp.controller('chessController', function($scope, $http){
 	}
 });
 
+
+
+var testGridApp = angular.module("testGridApp", ['ngGrid']);
+
+testGridApp.controller('staticGridController', function($scope){
+	$scope.theData = [{column1: "Test", column2: "This"},
+						{column1: "MoreTest", column2: "StillThis"}];
+	$scope.gridTest = { data: 'theData'};
+
+});
+
 // function nextMove(game){
 // 	function($scope, $http){
 // 		$http.get('/nextMove?game=' + $scope.gameFen).success(function(data){
