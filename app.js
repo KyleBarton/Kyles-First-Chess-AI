@@ -3,19 +3,13 @@ var brainApp = angular.module("brainApp", []);
 
 
 brainApp.controller('chessController', function($scope, $http){
+
 	$http.get('/newGame').success(function(data){
 		$scope.gameFen = data;
 	}).error(function(err){
 		$scope.gameFen = 'could not find endpoint';
 	});
-	// $http.get('/a2').success(function(data){
-	// 	if (data.color === "b"){
-	// 		$scope.squareA2 = data.type;
-	// 	}
-	// 	else $scope.squareA2 = data.type.toUpperCase();
-	// }).error(function(err){
-	// 	$scope.squareA2 = "nope";
-	// });
+
 	$http.get('/ascii?game=' + $scope.gameFen).success(function(data){
 		$scope.gameAscii = data;
 	}).error(function(err){
@@ -31,25 +25,7 @@ brainApp.controller('chessController', function($scope, $http){
 				$scope.gameAscii = "Ascii failed to load";
 			});
 		}).error(function(err){
-			$scope.gameFen = "nope!";
-		})
-	}
+			$scope.gameFen = "Could not get next game";
+		});
+	};
 });
-
-
-
-var testGridApp = angular.module("testGridApp", ['ngGrid']);
-
-testGridApp.controller('staticGridController', function($scope){
-	$scope.theData = [{column1: "Test", column2: "This"},
-						{column1: "MoreTest", column2: "StillThis"}];
-	$scope.gridTest = { data: 'theData'};
-
-});
-
-// function nextMove(game){
-// 	function($scope, $http){
-// 		$http.get('/nextMove?game=' + $scope.gameFen).success(function(data){
-// 		$scope.nextGame = data;
-// 	});
-// };};

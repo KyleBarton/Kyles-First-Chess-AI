@@ -4,8 +4,8 @@
 		<title>This is a simulation of a random game</title>
 		<script src="./bower_components/angular/angular.min.js"></script>
 		<script src="./bower_components/jquery/dist/jquery.min.js"></script>
-		<script src="./bower_components/ng-grid/ng-grid-2.0.14.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="./bower_components/ng-grid/ng-grid.min.css"></link>
+		<script src="./bower_components/chessboardjs-0.3.0/js/chessboardjs-0.3.0.js"></script>
+		<link rel="stylesheet" type="text/css" href="./style.css" />
 		<script type="text/javascript" src="./app.js"></script>
 	</head>
 	<body>
@@ -14,8 +14,5 @@
 		<p>{{gameFen}}</p>
 		<p>{{gameAscii}}</p>
 		<button ng-click="nextMove()">Next Move!</button>
-	</div>
-	<div ng-app="testGridApp" ng-controller="staticGridController">
-		<p ng-grid="gridTest"><p>
 	</div>
 </html>
