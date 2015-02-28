@@ -9,15 +9,16 @@
 		<link rel="stylesheet" type="text/css" href="./bower_components/chessboardjs-0.3.0/css/chessboard-0.3.0.css" />
 		<script type="text/javascript" src="./app.js"></script>
 	</head>
-	<body>
+	<body ng-app="brainApp">
 	HI THERE
-	<div ng-app="brainApp" ng-controller="chessController">
-		<p>{{gameFen}}</p>
-		<p>{{gameAscii}}</p>
+	<div ng-controller="chessController">
+		<p style="visibility: hidden">{{gameFen}}</p>
+		<!-- <p>{{gameAscii}}</p> -->
 		<button ng-click="nextMove()">Next Move!</button>
 	</div>
 	<div id="board1" style="width: 400px">
 	</div>
+	<div>{{errorMessage}}</div>
 	<script>var board1 = new ChessBoard('board1', 'start')</script>
 	</body>
 </html>
