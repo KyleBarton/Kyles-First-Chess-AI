@@ -20,9 +20,11 @@ brainApp.controller('chessController', function($scope, $http){
 	$scope.nextMove = function(){
 		$http.get('/nextMove?game=' + $scope.gameFen).success(function(data){
 			$scope.gameFen = data;
+
 			$http.get('/ascii?game=' + $scope.gameFen).success(function(data){
 				$scope.gameAscii = data;
-				var board1 = new ChessBoard('board1', $scope.gameFen);
+				// debugger;
+				//var board1 = new ChessBoard('board1', $scope.gameFen);
 			}).error(function(err){
 				$scope.errorMessage = "Ascii failed to load";
 			});

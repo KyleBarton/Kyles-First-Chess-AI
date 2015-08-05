@@ -1,83 +1,41 @@
-//This is where the actual AI will be done
-
-var util = require('util')
-var chess = require('./ChessLogic/chess')
-
-var express = require('express');
-
-var app = express();
-
-app.use(express.static(__dirname));
-
-app.get('/', function(req, res){
-	res.send("didn't get there dude");
-})
+//this will be the brain.js
+var chess = require('./ChessLogic/chess');
 
 
-app.get('/newGame', function(req, res){
-	var game = chess.Chess();
-	var file = game.fen();
-	res.send(file);
-});
-
-app.get('/a2', function(req, res){
-	var game = chess.Chess();
-	res.send(game.get('a2'));
-})
-
-app.get('/nextMove', function(req, res){
-	var game = chess.Chess();
-	game.load(req.query.game);
-	game.move(nextMove(game));
-	res.send(game.fen());
-})
-
-app.get('/ascii', function(req, res){
-	var game = chess.Chess();
-	game.load(req.query.game);
-	res.send(game.ascii());
-})
-
-app.listen(3000);
-
-console.log('Listening on port 3000');
-
-
-
-
-// function simRandomGame(){
-// 	var game = new chess.Chess();
-// 	while(!game.game_over()){
-// 		game.move(nextMove(game));
-// 		console.log(game.ascii());
-// 		// console.log("Position\n " + game.ascii() + '\n');
-// 		// var moves = game.moves();
-// 		// var move = moves[Math.floor(Math.random() * moves.length)]
-// 		// game.move(move);
-// 		// console.log("move: " + move + '\n');
-// 		// //console.readLine();
-// 	}
+/*current game needs to be 
+a moodel that doesn't overlap
+with the chess logic
+stuff. Board maybe?*/
+// var Game = function(){
+// 	var fen;
+// 	var gameId;
 // }
 
-function nextMove(game){
-	var moves = game.moves();
 
-	var move = moves[Math.floor(Math.random() * moves.length)];
-
-	return move;
+this.getNewGame = function(){
+	return chess.Chess();
 }
 
-// var bigGame = new chess.Chess();
 
-// function initGame(){
-// 	return new chess.Chess();
-// }
+this.makeNextMove = function(gameFen){
+	var game = chess.Chess();
+	game.load(gameFen);
+	var moves = game.moves();
+	var move = this.calculateNextMove(moves);
 
-// function moveNext(){
-// 	bigGame.move(nextMove(bigGame));
-// 	return bigGame.ascii();
-// }
-
-//Ok, let's treat this like a server for now.
+	game.move(move);
+	return game.fen();
+	//return gameFen;
+}
 
 
+this.getAscii = function(gameFen){
+	var game = chess.Chess();
+	game.load(gameFen);
+	return game.ascii();
+}
+
+
+this.calculateNextMove = function(moves){
+	return moves[Math.floor(Math.random()*moves.length)];
+}
