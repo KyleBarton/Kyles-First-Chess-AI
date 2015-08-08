@@ -24,7 +24,13 @@ this.makeNextMove = function(gameFen){
 	var move = this.calculateNextMove(moves);
 
 	game.move(move);
-	return game.fen();
+
+	if(!game.game_over()){
+		return game.fen();		
+	}
+	else{
+		return 'GameOver';
+	}
 	//return gameFen;
 }
 
