@@ -13,7 +13,7 @@ stuff. Board maybe?*/
 
 
 this.getNewGame = function(){
-	return chess.Chess();
+	return chess.Chess().fen();
 }
 
 

@@ -23,6 +23,11 @@
 		<button ng-click="simRestOfGame()">Sim Remainder</button>
 	</div>
 
+	<div>
+		<button ng-click="stopSim()">Stop Simulation</button>
+		<p ng-show="simStopped" style="color:red">Simulation Stopped</p>
+	</div>
+
 	<div id="board1" style="width: 400px"></div>
 	<script>//var board1 = new ChessBoard('board1', 'start')</script>
 	
