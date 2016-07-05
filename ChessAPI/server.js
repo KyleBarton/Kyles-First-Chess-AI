@@ -14,17 +14,22 @@ app.use(bodyParser.json());
 var gamesEndpoint = "/games";
 
 app.post(gamesEndpoint, function(req, res){
-
-	res.send(gamesController.newGame());
+	gamesController.newGame(function(err, data){
+		res.send(data);
+	})
 });
 
 app.route(gamesEndpoint+"/:gameId")
 
 .get(function(req, res){
-	res.send('you got a game of id ' + req.params.gameId);
+	gamesController.get(req.params.gameId, function(err, data){
+		res.send(data);
+	})
 })
 .put(function(req, res){
-	res.send("you're changing a game of id " + req.params.gameId);
+	gamesController.makeMove(req.params.gameId, function(err, data){
+		res.send(data);
+	});
 });
 
 app.listen(3001);

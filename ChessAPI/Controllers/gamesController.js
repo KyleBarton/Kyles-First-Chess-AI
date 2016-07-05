@@ -1,14 +1,14 @@
 //this is the games controller
 
 var gamesController = {
-	newGame : function(){
-		return 'You started a new game in the games controller!';
+	newGame : function(callBack){
+		callBack(null, 'You started a new game in the games controller!');
 	},
-	getGame : function(gameId){
-		return 'You got a game with id ' + gameId + ' in the games controller!';
+	get : function(gameId, callBack){
+		callBack(null, 'You got a game with id ' + gameId + ' in the games controller!');
 	},
-	makeMove : function(gameId){
-		return 'You\'re editing a game with id ' + gameId + ' in the games controller!';
+	makeMove : function(gameId, callBack){
+		callBack(null, 'You\'re editing a game with id ' + gameId + ' in the games controller!');
 	}
 }
 
