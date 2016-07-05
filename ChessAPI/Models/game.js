@@ -1,12 +1,17 @@
 //This is the game
 var newGame = require('../../ChessLogic/chess').Chess;
 
+var gameRepository = require('../DataAccess/gameRepository');
+
+
 var game = {
-	newGame: function(){
-		this.fen = newGame().fen();
-		this.id = '1234';
-		this.gameOver = false;
-		return this;
+	newGame: function(saveFn, callBack){
+		var me = this;
+		me.game = newGame();
+		saveFn(me.game.fen(), function(err, id){
+			me.id = id;
+			callBack(null, me.getModel());	
+		});
 	},
 	init: function(data){
 		var logicalGame = newGame();
@@ -23,8 +28,8 @@ var game = {
 	getModel: function(){
 		return {
 			"Id":  this.id,
-			"Fen": this.fen,
-			"GameOver": this.gameOver
+			"Fen": this.game.fen(),
+			"GameOver": this.game.game_over()
 		}
 	}
 };

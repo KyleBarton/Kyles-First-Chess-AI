@@ -16,7 +16,7 @@ var gamesEndpoint = "/games";
 app.post(gamesEndpoint, function(req, res){
 	gamesController.newGame(function(err, data){
 		res.send(data);
-	})
+	});
 });
 
 app.route(gamesEndpoint+"/:gameId")
@@ -24,7 +24,7 @@ app.route(gamesEndpoint+"/:gameId")
 .get(function(req, res){
 	gamesController.get(req.params.gameId, function(err, data){
 		res.send(data);
-	})
+	});
 })
 .put(function(req, res){
 	gamesController.makeMove(req.params.gameId, function(err, data){
