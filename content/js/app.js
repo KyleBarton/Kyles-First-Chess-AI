@@ -24,17 +24,18 @@ brainApp.controller('chessController', function($scope, $http){
 
 	$scope.simRestOfGame = function(){
 		$scope.simStopped = false;
-		var gameOver = false;
+		// var gameOver = false;
 		$scope.simulation = setInterval(function(){
 			// console.log('hi there!');
 			$http.get('/nextMove?game=' + $scope.gameFen).then(function(data){
-				if (data === 'GameOver'){
-					// console.log('i"m here');
-					gameOver = true;
+				if (data.data === 'GameOver'){
+					debugger;
+					$scope.stopSim();
+					// gameOver = true;
 				}
-				else if ($scope.gameFen === data){
-					// console.log('No I"m here');
-					gameOver = true;
+				else if ($scope.gameFen === data.data){
+					debugger;
+					// gameOver = true;
 				}
 				else{
 					// $scope.gameFen = data.data;
@@ -44,7 +45,7 @@ brainApp.controller('chessController', function($scope, $http){
 				$scope.errorMessage = "Simulation Error: " + error;
 			});
 
-		}, 250);
+		}, 100);
 	}
 
 	$scope.stopSim = function(){

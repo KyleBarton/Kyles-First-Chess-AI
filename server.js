@@ -16,7 +16,7 @@ app.get('/', function(req, res){
 app.get('/newGame', function(req, res){
 	res.send(brain.getNewGame());
 });
-
+›
 app.get('/a2', function(req, res){
 	var game = chess.Chess();
 	res.send(game.get('a2'));
