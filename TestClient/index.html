@@ -6,23 +6,29 @@
 		<script type="text/javascript">
 			var socket = io();
 
+			var gameMoves = [];
+
 			var listen = function(){
 				socket.on('created game', function(data){
-					console.log(data);
 					document.getElementById('gameid').text = data.id;
 					document.getElementById('fen').text = data.fen;
 					document.getElementById('gameOver').text = data.gameOver;
+					gameMoves = data.moves;
 				});
 				socket.on('updated game', function(data){
 					document.getElementById('gameid').text = data.id;
 					document.getElementById('fen').text = data.fen;
 					document.getElementById('gameOver').text = data.gameOver;
+					gameMoves = data.moves;
 				});
 			}
 			listen();
 
 			var randomMove = function(){
-				socket.emit('random move', document.getElementById('gameid').text);
+				socket.emit('move', {
+					"gameid": document.getElementById('gameid').text,
+					"move": gameMoves[0]
+				});
 			};
 			var startGame = function(){
 				socket.emit('new game', null);
