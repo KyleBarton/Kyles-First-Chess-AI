@@ -32,6 +32,14 @@ app.route(gamesEndpoint+"/:gameId")
 	});
 });
 
+app.route(gamesEndpoint+"/:gameId/moves")
+
+.get(function(req, res){
+	gamesController.getMoves(req.params.gameId, function(err, data){
+		res.send(data);
+	})
+})
+
 app.listen(3001);
 
 console.log('Listening on port 3001');

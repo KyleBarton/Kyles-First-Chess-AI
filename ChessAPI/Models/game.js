@@ -28,6 +28,9 @@ var game = {
 			"Fen": this.game.fen(),
 			"GameOver": this.game.game_over()
 		}
+	},
+	getMoves: function(){
+		return this.game.moves();
 	}
 };
 
