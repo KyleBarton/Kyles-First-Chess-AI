@@ -14,12 +14,9 @@ var game = {
 		});
 	},
 	init: function(data){
-		var logicalGame = newGame();
-		logicalGame.load(data.fen);
-
-		this.fen = logicalGame.fen();
-		this.id = data.id;
-		this.gameOver = logicalGame.game_over();
+		this.game = newGame();
+		this.game.load(data.fen);
+		this.id = data._id;
 		return this;
 	},
 	currentBoard: function(){

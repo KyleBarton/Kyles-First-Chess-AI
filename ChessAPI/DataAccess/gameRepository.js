@@ -1,18 +1,14 @@
 //This is the game repository.
-var mongoClient = require('mongodb').MongoClient;
+var mongo = require('mongodb');
+var mongoClient = mongo.MongoClient;
 
 var dbUrl = 'mongodb://localhost:27017/Chess';
 var dbConnectError = 'Could not connect to mongo database';
 
 var gameRepository = {
-	getData: function(id, callBack){
-		mongoClient.connect(dburl, function(err, db){
-			if (err){
-				throw dbConnectError;
-			}
-			db.collection('Games').find({"_id": ObjectId(id)}, function(err, records){
-				console.log(records);
-			})
+	getGame: function(id, callBack){
+		mongoClient.connect(dbUrl, function(err, db){
+			db.collection('Games').findOne({"_id": new mongo.ObjectID(id)}, callBack);
 		});
 	},
 	saveNew: function(fen, callBack){

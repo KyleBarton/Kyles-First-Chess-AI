@@ -12,7 +12,7 @@ var gamesController = {
 		});
 	},
 	get : function(gameId, callBack){
-		gameRepository.getData(gameId, function(err, data){
+		gameRepository.getGame(gameId, function(err, data){
 			var game = gameProto.init(data);
 			callBack(null, game.getModel());
 		})
