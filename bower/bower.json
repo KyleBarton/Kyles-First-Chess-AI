@@ -1,8 +1,9 @@
 {
+	"name": "kyles-First-Chess-AI",
 	"dependencies": {
 		"angular": "*",
-		"chessboardjs-0.3.0": "*",
+		"chessboard-js": "*",
 		"jquery": "*",
 		"ng-grid": "*"
-	},
+	}
 }
