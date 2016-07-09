@@ -2,13 +2,22 @@
 var bodyParser = require('body-parser');
 var express = require('express');
 
+
 //chessAPI Dependencies
 var gamesController = require('./Controllers/gamesController');
 
 
 var app = express();
 app.use(bodyParser.json());
+app.use(function(req, res, next){
+	res.setHeader('Access-Control-Allow-Origin', '*');
 
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT');
+
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    next();
+})
 
 
 var gamesEndpoint = "/games";

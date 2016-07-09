@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script type="text/javascript">
+			var socket = io();
+
+			var gameMoves = [];
+
+			var listen = function(){
+				socket.on('created game', function(data){
+					document.getElementById('gameid').text = data.id;
+					document.getElementById('fen').text = data.fen;
+					document.getElementById('gameOver').text = data.gameOver;
+					gameMoves = data.moves;
+				});
+				socket.on('updated game', function(data){
+					document.getElementById('gameid').text = data.id;
+					document.getElementById('fen').text = data.fen;
+					document.getElementById('gameOver').text = data.gameOver;
+					gameMoves = data.moves;
+				});
+			}
+			listen();
+
+			var randomMove = function(){
+				socket.emit('move', {
+					"gameid": document.getElementById('gameid').text,
+					"move": gameMoves[0]
+				});
+			};
+			var startGame = function(){
+				socket.emit('new game', null);
+			};
+		</script>
+	</head>
+	<body>
+		<div> HI THERE FRIEND </div>
+		<div> GameId: <a id="gameid"></a> </div>
+		<div> Fen: <a id="fen"></a> </div>
+		<div> Turn: (TODO) <a id="turn"></a> </div>
+		<div> Game Over: <a id="gameOver"></a></div>
+
+		<button onclick="randomMove()">Random Move</button>
+		<button onclick="startGame()">Start Game</button>
+	</body>
+</html>
