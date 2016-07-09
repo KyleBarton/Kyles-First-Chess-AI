@@ -22,7 +22,7 @@
 			listen();
 
 			var randomMove = function(){
-				socket.emit('random Move', document.getElementById('gameid').text);
+				socket.emit('random move', document.getElementById('gameid').text);
 			};
 			var startGame = function(){
 				socket.emit('new game', null);
