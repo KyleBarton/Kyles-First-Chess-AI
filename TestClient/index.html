@@ -6,22 +6,35 @@
 		<script type="text/javascript">
 			var socket = io();
 
-			var randomMove = function(){
+			var listen = function(){
+				socket.on('created game', function(data){
+					console.log(data);
+					document.getElementById('gameid').text = data.id;
+					document.getElementById('fen').text = data.fen;
+					document.getElementById('gameOver').text = data.gameOver;
+				});
+				socket.on('updated game', function(data){
+					document.getElementById('gameid').text = data.id;
+					document.getElementById('fen').text = data.fen;
+					document.getElementById('gameOver').text = data.gameOver;
+				});
+			}
+			listen();
 
+			var randomMove = function(){
+				socket.emit('random Move', document.getElementById('gameid').text);
 			};
 			var startGame = function(){
-				jQuery.post("http://localhost:3001/games", null, function(data, status, jqxhr){
-					debugger;
-				},
-				"json");
+				socket.emit('new game', null);
 			};
 		</script>
 	</head>
 	<body>
 		<div> HI THERE FRIEND </div>
-		<div id="gameid"> GameId: </div>
-		<div id="fen"> Fen: </div>
-		<div id="turn"> Turn: </div>
+		<div> GameId: <a id="gameid"></a> </div>
+		<div> Fen: <a id="fen"></a> </div>
+		<div> Turn: (TODO) <a id="turn"></a> </div>
+		<div> Game Over: <a id="gameOver"></a></div>
 
 		<button onclick="randomMove()">Random Move</button>
 		<button onclick="startGame()">Start Game</button>
