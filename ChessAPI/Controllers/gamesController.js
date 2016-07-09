@@ -17,8 +17,14 @@ var gamesController = {
 			callBack(null, game.getModel());
 		})
 	},
-	makeMove : function(gameId, callBack){
-		callBack(null, 'You\'re editing a game with id ' + gameId + ' in the games controller!');
+	makeMove : function(gameId, move, callBack){
+		gameRepository.getGame(gameId, function(err, data){
+			var game = gameProto.init(data);
+			game.makeMove(move);
+			gameRepository.save(game.getModel(), function(err, data){
+				callBack(null, game.getModel());
+			});
+		})
 	}, 
 	getMoves: function(gameId, callBack){
 		gameRepository.getGame(gameId, function(err, data){

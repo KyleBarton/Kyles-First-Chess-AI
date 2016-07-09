@@ -24,6 +24,14 @@ var gameRepository = {
 				db.close();
 			});
 		});
+	},
+	save: function(game, callBack){
+		mongoClient.connect(dbUrl, function(err, db){
+			db.collection('Games').updateOne(
+				{"_id": new mongo.ObjectID(game.id)}, 
+				{$set: {"fen": game.fen}},
+				callBack);
+		});
 	}
 };
 

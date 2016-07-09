@@ -25,17 +25,26 @@ app.route(gamesEndpoint+"/:gameId")
 	gamesController.get(req.params.gameId, function(err, data){
 		res.send(data);
 	});
-})
-.put(function(req, res){
-	gamesController.makeMove(req.params.gameId, function(err, data){
-		res.send(data);
-	});
 });
+//don't know if i'll need this.
+// .put(function(req, res){
+// 	gamesController.makeMove(req.params.gameId, function(err, data){
+// 		res.send(data);
+// 	});
+// });
 
 app.route(gamesEndpoint+"/:gameId/moves")
 
 .get(function(req, res){
 	gamesController.getMoves(req.params.gameId, function(err, data){
+		res.send(data);
+	})
+})
+
+app.route(gamesEndpoint+"/:gameId/moves/:move")
+
+.put(function(req, res){
+	gamesController.makeMove(req.params.gameId, req.params.move, function(err, data){
 		res.send(data);
 	})
 })

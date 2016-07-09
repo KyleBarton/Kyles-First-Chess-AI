@@ -24,13 +24,16 @@ var game = {
 	},
 	getModel: function(){
 		return {
-			"Id":  this.id,
-			"Fen": this.game.fen(),
-			"GameOver": this.game.game_over()
+			"id":  this.id,
+			"fen": this.game.fen(),
+			"gameOver": this.game.game_over()
 		}
 	},
 	getMoves: function(){
 		return this.game.moves();
+	},
+	makeMove: function(move){
+		this.game.move(move);
 	}
 };
 
