@@ -1,12 +1,29 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 		<script src="/socket.io/socket.io.js"></script>
 		<script type="text/javascript">
 			var socket = io();
+
+			var randomMove = function(){
+
+			};
+			var startGame = function(){
+				jQuery.post("http://localhost:3001/games", null, function(data, status, jqxhr){
+					debugger;
+				},
+				"json");
+			};
 		</script>
 	</head>
 	<body>
 		<div> HI THERE FRIEND </div>
+		<div id="gameid"> GameId: </div>
+		<div id="fen"> Fen: </div>
+		<div id="turn"> Turn: </div>
+
+		<button onclick="randomMove()">Random Move</button>
+		<button onclick="startGame()">Start Game</button>
 	</body>
 </html>
