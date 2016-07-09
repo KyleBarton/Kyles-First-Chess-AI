@@ -8,7 +8,10 @@ var dbConnectError = 'Could not connect to mongo database';
 var gameRepository = {
 	getGame: function(id, callBack){
 		mongoClient.connect(dbUrl, function(err, db){
-			db.collection('Games').findOne({"_id": new mongo.ObjectID(id)}, callBack);
+			db.collection('Games').findOne({"_id": new mongo.ObjectID(id)}, function(err, record){
+				callBack(err, record);
+				db.close();
+			});
 		});
 	},
 	saveNew: function(fen, callBack){
@@ -30,7 +33,10 @@ var gameRepository = {
 			db.collection('Games').updateOne(
 				{"_id": new mongo.ObjectID(game.id)}, 
 				{$set: {"fen": game.fen}},
-				callBack);
+				function(err, record){
+					callBack(err, record);
+					db.close();
+				});
 		});
 	}
 };
