@@ -1,0 +1,8 @@
+{
+	"dependencies": {
+		"angular": "*",
+		"chessboardjs-0.3.0": "*",
+		"jquery": "*",
+		"ng-grid": "*"
+	},
+}
