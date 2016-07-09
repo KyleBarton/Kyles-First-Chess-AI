@@ -26,7 +26,8 @@ var game = {
 		return {
 			"id":  this.id,
 			"fen": this.game.fen(),
-			"gameOver": this.game.game_over()
+			"gameOver": this.game.game_over(),
+			"moves": this.game.moves()
 		}
 	},
 	getMoves: function(){
