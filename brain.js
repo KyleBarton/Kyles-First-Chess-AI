@@ -1,19 +1,47 @@
-//This is where the actual AI will be done
+//this will be the brain.js
+var chess = require('./ChessLogic/chess');
 
-var util = require('util')
-var chess = require('./ChessLogic/chess')
 
-function simRandomGame(){
-	var game = new chess.Chess();
-	while(!game.game_over()){
-		console.log("Position\n " + game.ascii() + '\n');
-		var moves = game.moves();
-		var move = moves[Math.floor(Math.random() * moves.length)]
-		game.move(move);
-		console.log("move: " + move + '\n');
-		console.readLine();
-	}
+/*current game needs to be 
+a moodel that doesn't overlap
+with the chess logic
+stuff. Board maybe?*/
+// var Game = function(){
+// 	var fen;
+// 	var gameId;
+// }
+
+
+this.getNewGame = function(){
+	return chess.Chess().fen();
 }
 
 
-simRandomGame();
+this.makeNextMove = function(gameFen){
+	var game = chess.Chess();
+	game.load(gameFen);
+	var moves = game.moves();
+	var move = this.calculateNextMove(moves);
+
+	game.move(move);
+
+	if(!game.game_over()){
+		return game.fen();		
+	}
+	else{
+		return 'GameOver';
+	}
+	//return gameFen;
+}
+
+
+this.getAscii = function(gameFen){
+	var game = chess.Chess();
+	game.load(gameFen);
+	return game.ascii();
+}
+
+
+this.calculateNextMove = function(moves){
+	return moves[Math.floor(Math.random()*moves.length)];
+}

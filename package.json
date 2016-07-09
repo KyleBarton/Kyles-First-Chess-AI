@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "express": "*",
+    "grunt": "^0.4.5",
+    "http": "*",
+    "body-parser": "*"
+  }
+}
