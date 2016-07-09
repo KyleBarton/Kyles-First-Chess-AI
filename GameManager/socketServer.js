@@ -15,24 +15,47 @@ var createNewGame = function(callBack){
 	};
 	var request = http.request(options, function(response){
 		response.setEncoding('utf8');
-		response.on('data', callBack);
+		response.on('data', function(data){
+			callBack(JSON.parse(data));
+		});
 	});
 	request.write("");
 	request.end();
 }
 
-var getGameAndMoves = function(gameId, callBack){
-	var game = {};
-	var moves = [];
-	var gameOptions = {
+var getGame = function(gameId, callBack){
+	var options = {
 		"host": "localhost",
 		"port": "3001",
 		"path": "/games/" + gameId,
 		"method": "GET"
 	};
-	var request = http.request(options, function(gameReturned){
-		game = gameReturned;
-	})
+	var request = http.request(options, function(response){
+		response.setEncoding('utf8');
+		response.on('data', function(data){
+			callBack(JSON.parse(data));
+		});
+	});
+
+	request.end();
+
+}
+
+var makeMove = function(gameId, move, callBack){
+	var options = {
+		"host": "localhost",
+		"port": "3001",
+		"path": "/games/" + gameId + "/moves/" + move,
+		"method": "PUT"
+	}
+	var request = http.request(options, function(response){
+		response.setEncoding('utf8');
+		response.on('data', function(data){
+			callBack(JSON.parse(data));
+		});
+	});
+	request.write("");
+	request.end();
 }
 
 io.on('connection', function(socket){
@@ -41,14 +64,14 @@ io.on('connection', function(socket){
 	
 	socket.on('new game', function(data){
 		createNewGame(function(game){
-			socket.emit('created game', JSON.parse(game))
+			socket.emit('created game', game)
 		})
 	});
 
 	socket.on('random move', function(gameId){
-		getGameAndMoves(gameId, function(game){
+		getGame(gameId, function(game){
 			makeMove(gameId, game.moves[0], function(game){
-				socket.emit('updated game', JSON.parse(game));
+				socket.emit('updated game', game);
 			});
 		});
 	})
