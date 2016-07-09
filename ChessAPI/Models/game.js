@@ -27,7 +27,7 @@ var game = {
 			"id":  this.id,
 			"fen": this.game.fen(),
 			"gameOver": this.game.game_over(),
-			"moves": this.game.moves()
+			"moves": this.game.game_over() ? [] : this.game.moves()
 		}
 	},
 	getMoves: function(){
