@@ -10,16 +10,16 @@
 
 			var listen = function(){
 				socket.on('created game', function(data){
-					document.getElementById('gameid').text = data.id;
-					document.getElementById('fen').text = data.fen;
-					document.getElementById('gameOver').text = data.gameOver;
-					gameMoves = data.moves;
+					document.getElementById('gameid').text = data.game.id;
+					document.getElementById('fen').text = data.game.fen;
+					document.getElementById('gameOver').text = data.game.gameOver;
+					gameMoves = data.game.moves;
 				});
 				socket.on('updated game', function(data){
-					document.getElementById('gameid').text = data.id;
-					document.getElementById('fen').text = data.fen;
-					document.getElementById('gameOver').text = data.gameOver;
-					gameMoves = data.moves;
+					document.getElementById('gameid').text = data.game.id;
+					document.getElementById('fen').text = data.game.fen;
+					document.getElementById('gameOver').text = data.game.gameOver;
+					gameMoves = data.game.moves;
 				});
 			}
 			listen();
@@ -27,16 +27,18 @@
 			var randomMove = function(){
 				socket.emit('move', {
 					"gameid": document.getElementById('gameid').text,
-					"move": gameMoves[0]
+					"move": gameMoves[0],
+					"name": document.getElementById('playerName').value
 				});
 			};
 			var startGame = function(){
-				socket.emit('new game', null);
+				socket.emit('add Player', document.getElementById('playerName').value);
 			};
 		</script>
 	</head>
 	<body>
 		<div> HI THERE FRIEND </div>
+		<div> Enter your name: <input type="text" id="playerName"></div>
 		<div> GameId: <a id="gameid"></a> </div>
 		<div> Fen: <a id="fen"></a> </div>
 		<div> Turn: (TODO) <a id="turn"></a> </div>
